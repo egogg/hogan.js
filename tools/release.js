@@ -53,13 +53,13 @@ var wrappers = fs.readdirSync(__dirname + wrapperPath).map(function(f) {
 var distPath = __dirname + '/../dist/';
 wrappers.forEach(function(wrapper) {
   var tail = path.basename(wrapper, '.mustache');
-  var target = distPath + 'hogan-' + version + '.' + tail;
-  var uglified =  distPath + 'hogan-' + version + '.min.' + tail;
+  var target = distPath + 'hogan.' + tail;
+  var uglified =  distPath + 'hogan.min.' + tail;
   fs.writeFileSync(target, Hogan.compile(read(wrapper)).render(context));
   uglify(target, uglified);
 });
 
 // Also release Hogan.Template on its own.
-var templateTarget = distPath + 'template-' + version + '.js';
+var templateTarget = distPath + 'template.js';
 fs.writeFileSync(templateTarget, read(__dirname + '/../lib/template.js'));
-uglify(templateTarget, distPath + 'template-' + version + '.min.js');
+uglify(templateTarget, distPath + 'template.min.js');
